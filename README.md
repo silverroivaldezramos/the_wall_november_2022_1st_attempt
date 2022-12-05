@@ -1,0 +1,1 @@
+# the_wall_november_2022_1st_attempt
