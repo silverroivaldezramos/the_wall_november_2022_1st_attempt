@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
     <meta name="description" content="The Wall Assignment Home Page">
     <meta name="author" content="Silver Roi V. Ramos">
     <title>The Wall</title>
     <link rel="stylesheet" href="../assets/css/wall.css">
-    <link rel="stylesheet" href="../assets/bootstrap-4.6.2-dist/css/bootstrap.min.css">
     <script src="../assets/jquery-3.6.0/jquery-3.6.0.js"></script>
     <script src="../assets/popper/popper.min.js"></script>
     <script src="../assets/bootstrap-4.6.2-dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/js/wall.js"></script>
+    <script src="../assets/js/wall.js"></script>
 </head>
 <body>
     <header>
@@ -28,130 +27,117 @@
     <section class="wall">
         <div class="wall_header">
             <h5><span>0</span> messages arranged by latest posted</h5>
-            <button type="button" class="btn" id="create_message" data-toggle="modal" data-target="#create_messages">Create Message</button>
+            <button type="button" id="create_message">Create Message</button>
         </div>
         <div class="no_message">
             <img src="../assets/images/no_message.png" alt="no message inbox">
-            <p>No Posted Message Yet...</p>
+            <p>No Posted Message Yet.</p>
         </div>
-        <div class="messages_inbox hidden">
+        <div class="messages_inbox">
             
         </div>
     </section>
-    <!-- Modal -->
-    <div class="modal fade" id="create_messages" tabindex="-1" role="dialog" aria-labelledby="create_messages_label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+    <!-- Modals -->
+    <div class="modal fade" id="create_message_modal">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img src="../assets/images/cancel.png" alt="close button" id="close_modal">
+                    <img src="../assets/images/cancel.png" alt="close_icon" class="close_modal">
                     <h3>Create a Message</h3>
                     <textarea id="create_message_textarea">Type your message here.</textarea>
                     <div>
-                        <a href="#" id="cancel_create_message_modal">Cancel</a>
+                        <a href="#" class="cancel_modal">Cancel</a>
                         <button class="post_message" id="post_message">Post Message</button>
                     </div>
-
-                    <!-- <h2>Confirm Delete Message</h2>
-                    <p>Are you sure you want to remove this message?</p>
-                    <p>This cannot be undone.</p>
-                    <div>
-                        <a href="#">Cancel</a>
-                        <button class="remove_message">Yes, Remove it.</button>
-                    </div> -->
-
-                    <!-- <h2>Confirm Delete Comment</h2>
-                    <p>Are you sure you want to remove this comment?</p>
-                    <p>This cannot be undone.</p>
-                    <div>
-                        <a href="#">Cancel</a>
-                        <button class="remove_message">Yes, Remove it.</button>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="delete_messages" tabindex="-1" role="dialog" aria-labelledby="delete_messages_label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+    <div class="modal fade" id="delete_message_modal">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img src="../assets/images/cancel.png" alt="close button" id="close_modal">
-                    <h2>Confirm Delete Message</h2>
+                    <img src="../assets/images/cancel.png" alt="close_icon" class="close_modal">
+                    <h3>Confirm Delete Message</h3>
                     <p>Are you sure you want to remove this message?</p>
                     <p>This cannot be undone.</p>
-                    <input type="hidden" id="message_id">
+                    <input type="hidden" class="message_id">
                     <div>
-                        <a href="#" id="delete_message_cancel_button">Cancel</a>
+                        <a href="#" class="cancel_modal">Cancel</a>
                         <button class="remove_message" id="remove_message">Yes, Remove it.</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="delete_comments" tabindex="-1" role="dialog" aria-labelledby="delete_comment_label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+    <div class="modal fade" id="delete_comment_modal">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img src="../assets/images/cancel.png" alt="close button" id="close_modal">
-                    <h2>Confirm Delete Comment</h2>
+                    <img src="../assets/images/cancel.png" alt="close_icon" class="close_modal">
+                    <h3>Confirm Delete Comment</h3>
                     <p>Are you sure you want to remove this comment?</p>
-                    <p>This cannot be undone.</p>
-                    <input type="hidden" id="comment_id">
+                    <p>This cannot be undone.</p> 
+                    <input type="hidden" class="comment_id">
                     <div>
-                        <a href="#" id="delete_comment_cancel_button">Cancel</a>
+                        <a href="#" class="cancel_modal">Cancel</a>
                         <button class="remove_comment" id="remove_comment">Yes, Remove it.</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="hidden" id="hidden_message_clone">
         <div class="message">
-            <p class="message_text"></p>
+            <p class="message_text">Sample text.</p>
             <ul class="message_control_list">
                 <li>
-                    <img src="../assets/images/messages-bubble-square-text.png" alt="messages icon in gray">
+                    <img src="../assets/images/messages-bubble-square-text.png" alt="message_icon">
                     <p class="comment btn" id="comment_button"><span>0</span> Comment</p>
                 </li>
                 <li>
-                    <img src="../assets/images/pencil-write.png" alt="pencil write icon in gray">
-                    <p class="edit btn" id="edit_message_button">Edit</p>
+                    <img src="../assets/images/pencil-write.png" alt="edit_icon">
+                    <p class="edit btn" id="edit_button">Edit</p>
                 </li>
                 <li>
-                    <img src="../assets/images/delete.png" alt="trashbin icon in gray">
-                    <p class="delete btn" id="delete_message_button">Delete</p>
+                    <img src="../assets/images/delete.png" alt="delete_icon">
+                    <p class="delete btn" id="delete_button">Delete</p>
                 </li>
                 <li>
-                    <img src="../assets/images/user_placeholder.png" alt="user icon">
-                    <p class="profile btn"><span>You</span> - Few seconds ago</p>
+                    <img src="../assets/images/user_placeholder.png" alt="user_icon">
+                    <p class="profile btn"> <span>You</span> - Few seconds ago</p>
                 </li>
             </ul>
             <div class="edit_message_box hidden">
-                <form action="#">
-                    <input type="hidden" id="message_id">
-                    <textarea type="text" id="edit_message_textarea"></textarea>
-                    <div>
-                        <button class="update_message" id="update_message_button">Update Message</button>
-                    </div>
-                </form>
+                <input type="hidden" id="edit_message_id">
+                <textarea id="edit_message_textarea"></textarea>
+                <div>
+                    <button type="button" class="update_message" id="update_message">Update Message</button>
+                </div>
             </div>
             <div class="comment_box hidden">
                 <form action="#">
-                    <input type="hidden" id="message_id">
-                    <textarea type="text" id="create_comment_textarea" placeholder="Example text."></textarea>
+                    <input type="hidden" id="comment_id">
+                    <textarea id="create_comment_textarea"></textarea>
                     <div>
-                        <button class="post_comment" id="post_comment">Post Comment</button>
+                        <button type="button" class="post_comment" id="post_comment_button">Post Comment</button>
                     </div>
                 </form>
                 <div class="comment_inbox">
-                </div>
+                    
+                </div> 
             </div>
             <div class="edit_comment_box hidden">
                 <form action="#">
-                    <input type="hidden" id="comment_id">
-                    <textarea type="text" id="edit_comment_textarea"></textarea>
+                    <input type="hidden" id="edit_comment_id">
+                    <textarea id="edit_comment_textarea"></textarea>
                     <div>
-                        <a href="#" id="edit_comment_cancel_button">Cancel</a>
-                        <button class="update_comment" id="update_comment_button">Update Comment</button>
+                        <a href="#" id="cancel_edit_comment">Cancel</a>
+                        <button type="button" class="update_comment" id="update_comment_button">Update Comment</button>
                     </div>
                 </form>
             </div>
@@ -159,19 +145,19 @@
     </div>
     <div class="hidden" id="hidden_comment_clone">
         <div class="comment_clone">
-            <p class="comment_text"></p>
+            <p class="comment_text">Sample text.</p>
             <ul class="comment_control_list">
                 <li>
-                    <img src="../assets/images/pencil-write.png" alt="pencil write icon in gray">
+                    <img src="../assets/images/pencil-write.png" alt="edit_icon">
                     <p class="edit btn" id="edit_comment_button">Edit</p>
                 </li>
                 <li>
-                    <img src="../assets/images/delete.png" alt="trashbin icon in gray">
-                    <p class="delete btn" id="delete_comment_button" data-toggle="modal" data-target="#delete_message">Delete</p>
+                    <img src="../assets/images/delete.png" alt="delete_icon">
+                    <p class="delete btn" id="delete_comment_button">Delete</p>
                 </li>
                 <li>
-                    <img src="../assets/images/user_placeholder.png" alt="user icon">
-                    <p class="profile btn"><span>You</span> - Few seconds ago</p>
+                    <img src="../assets/images/user_placeholder.png" alt="user_icon">
+                    <p class="profile btn"> <span>You</span> - Few seconds ago</p>
                 </li>
             </ul>
         </div>
